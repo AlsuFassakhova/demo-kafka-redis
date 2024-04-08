@@ -1,0 +1,20 @@
+server.port: 8085
+spring:
+  profiles.default: dev
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: demo
+      auto-offset-reset: latest
+      value-deserializer: com.example.demokafkaconsumer.kafka.consumer.NotificationDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
+  redis:
+    host: localhost
+    port: 6379
+    queue: notifications
